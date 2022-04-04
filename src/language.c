@@ -31,8 +31,11 @@ int main(int argc, char * argv[]){
 
     // For telling if the last number was numeric or not
     int wasNumeric = 0;
+    // In quotes
     int isString = 0;
+    // Length of current string
     int stringLen = 0;
+    // loop variable
     int running = 1;
     while (running){
         function = lines[fptr.y][fptr.x];
@@ -72,6 +75,8 @@ int main(int argc, char * argv[]){
             case '.': printf("%c", (char)((stack[stackptr])%256)); break;
             // Print as number
             case ',': printf("%d", stack[stackptr]); break;
+
+            case '_': printf("\n"); break;
 
             // Input //
             case '$': scanf("%d", &stack[stackptr]); break;
@@ -121,12 +126,13 @@ int main(int argc, char * argv[]){
 
             // Strings
             case '"': if (!wasNumeric) isString = !isString; break;
-            // Print string
+            // Prints string and sets ptr to start of the string
             case '@': {
                 for (int i = stackptr-stack[stackptr]; i < stackptr; i++){
                     printf("%c", stack[i]);
                 }
-            }
+                stackptr-=stack[stackptr];
+            } break;
 
             // Exiting the program
             case ';': running = 0; break;

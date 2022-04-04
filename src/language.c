@@ -58,6 +58,9 @@ int main(int argc, char * argv[]){
             // Print as number
             case ',': printf("%d", stack[stackptr]); break;
 
+            // Input //
+            case '$': scanf("%d", &stack[stackptr]); break;
+
             // Using numbers
             case '0':
             case '1':

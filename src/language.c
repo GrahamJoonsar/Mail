@@ -31,10 +31,25 @@ int main(int argc, char * argv[]){
 
     // For telling if the last number was numeric or not
     int wasNumeric = 0;
-
+    int isString = 0;
+    int stringLen = 0;
     int running = 1;
     while (running){
         function = lines[fptr.y][fptr.x];
+
+        if (isString){
+            if (function == '"'){ // End quote
+                isString = 0;
+                stack[++stackptr] = stringLen;
+                stringLen = 0;
+                addPosition(&fptr, currentDir);
+                continue;
+            }
+            stack[++stackptr] = function;
+            stringLen++;
+            addPosition(&fptr, currentDir);
+            continue;
+        }
 
         switch(function){
             // Changing directional movement
@@ -104,11 +119,20 @@ int main(int argc, char * argv[]){
                 break;
             }
 
+            // Strings
+            case '"': if (!wasNumeric) isString = !isString; break;
+            // Print string
+            case '@': {
+                for (int i = stackptr-stack[stackptr]; i < stackptr; i++){
+                    printf("%c", stack[i]);
+                }
+            }
+
             // Exiting the program
             case ';': running = 0; break;
         }
 
-        wasNumeric = ((function >= '0') && (function <= '9'));
+        wasNumeric = !isString && ((function >= '0') && (function <= '9'));
 
         addPosition(&fptr, currentDir);
     }

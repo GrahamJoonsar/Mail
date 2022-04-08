@@ -69,6 +69,8 @@ int main(int argc, char * argv[]){
 
             // Conditional if (if the current item on the stack is not 0 skip the next instruction)
             case '?': if (stack[stackptr]) addPosition(&fptr, currentDir); break;
+            // Skip the next intruction (Better for more compact programs)
+            case '~': addPosition(&fptr, currentDir); break;
 
             // Output //
             // Print as character

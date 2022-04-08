@@ -1,10 +1,1 @@
-99> ?v , " bottles of beer on the wall, " @ { , " bottles of beer! Take one down, pass it around, " @ 1 - , " bottles of beer on the wall!" @ _ {  v
-     "
-     D
-     o
-     n
-     e
-     "
-     @
-     ;
-  ^                                                                                                                                                <
+$,?;>,<;
